@@ -1,1 +1,1 @@
-# qr-treasure-hunt
+# QR codes for treasure hunt
