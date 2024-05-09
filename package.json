@@ -19,7 +19,9 @@
     "add": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-medium-image-zoom": "^5.2.0",
     "react-qr-code": "^2.0.12",
+    "react-router-dom": "^6.23.0",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

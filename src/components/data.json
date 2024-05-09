@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Namelis",
+      "imageUrl": "https://placehold.co/600x400?text=Gniauziai%201"
+    },
+    {
+      "id": 2,
+      "title": "Šulinys",
+      "imageUrl": "https://placehold.co/600x400?text=Gniauziai%202"
+    },
+    {
+      "id": 3,
+      "title": "Medis",
+      "imageUrl": "https://placehold.co/600x400?text=Gniauziai%203"
+    },
+    { "id": 4, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%204" },
+    { "id": 5, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%205" },
+    { "id": 6, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%206" },
+    { "id": 7, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%207" },
+    { "id": 8, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%208" },
+    { "id": 9, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%209" },
+    { "id": 10, "imageUrl": "https://placehold.co/600x400?text=Gniauziai%2010" }
+  ]
+}

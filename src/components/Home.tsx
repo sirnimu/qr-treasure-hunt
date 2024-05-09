@@ -1,23 +1,35 @@
-import { Box, Container, Typography } from "@mui/material";
-import QRCode from "react-qr-code";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import OldPaper from "./ui/OldPaper";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <Container>
-      <Box
+    <OldPaper>
+      <Stack
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          flexDirection: "column",
           gap: 4,
-          height: "100vh",
+          minHeight: "100vh",
         }}
       >
-        <QRCode value="Hehehe" />
-        <Typography variant="h1">Gniaužių lobių paieška</Typography>;
-      </Box>
-      <img src="requirements.jpg" width="100%" height="100%"></img>
-    </Container>
+        <Box sx={{ width: "50vw", maxWidth: "500px" }}>
+          <img src="gniauziu_logo-591x442.png" width="100%" height="100%"></img>
+        </Box>
+        <Stack
+          sx={{
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="h1" sx={{ m: 0 }}>
+            Lobis
+          </Typography>
+          <Typography sx={{ fontSize: "3em" }}>2024</Typography>
+        </Stack>
+        <Button onClick={() => navigate("/intro")}>Noriu pradėti!</Button>
+      </Stack>
+    </OldPaper>
   );
 };
 
