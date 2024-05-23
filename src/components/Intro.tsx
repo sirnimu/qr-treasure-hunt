@@ -1,14 +1,16 @@
 import { Button, Stack, Typography } from "@mui/material";
-import OldPaper from "./ui/OldPaper";
+import OldPaper from "./ui/BasePage";
 import { useNavigate } from "react-router-dom";
 
 const Intro = () => {
   const navigate = useNavigate();
 
+  const teamName = localStorage.getItem("team");
+
   return (
     <OldPaper>
       <Stack py={2}>
-        <Typography variant="h3">Legenda</Typography>
+        <Typography variant="h3">{teamName}</Typography>
       </Stack>
       <Typography variant="body1">
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
@@ -22,9 +24,7 @@ const Intro = () => {
         versions of Lorem Ipsum.
       </Typography>
       <Stack py={2}>
-        <Button onClick={() => navigate("/questions")}>
-          Labai noriu ieškoti!
-        </Button>
+        <Button onClick={() => navigate("/play")}>Žaidžiam!</Button>
       </Stack>
     </OldPaper>
   );

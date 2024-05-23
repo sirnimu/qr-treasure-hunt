@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import OldPaper from "./ui/OldPaper";
+import OldPaper from "./ui/BasePage";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -25,9 +25,10 @@ const Home = () => {
           <Typography variant="h1" sx={{ m: 0 }}>
             Lobis
           </Typography>
-          <Typography sx={{ fontSize: "3em" }}>2024</Typography>
+          <Typography variant="h1">2024</Typography>
         </Stack>
-        <Button onClick={() => navigate("/intro")}>Noriu pradėti!</Button>
+        <Button onClick={() => navigate("/add-team")}>Sukurti komandą</Button>
+        <Button onClick={() => navigate("/leaderboard")}>Rezultatai</Button>
       </Stack>
     </OldPaper>
   );
