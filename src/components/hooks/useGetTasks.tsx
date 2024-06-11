@@ -11,8 +11,10 @@ import db from "../../firebase";
 
 export const useGetTasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadServerData = useCallback(async () => {
+    setIsLoading(true);
     const tasksCollection = collection(db, "assignments");
 
     const converter = {
@@ -29,13 +31,15 @@ export const useGetTasks = () => {
       fetchedTasks.push({ ...doc.data(), id: doc.id })
     );
     setTasks(fetchedTasks);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
     loadServerData();
-  }, [loadServerData]);
+  }, []);
 
   return {
     tasks,
+    isLoading,
   };
 };

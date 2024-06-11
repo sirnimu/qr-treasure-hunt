@@ -1,4 +1,10 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useGetTasks } from "./hooks/useGetTasks";
 import BasePage from "./ui/BasePage";
 import { FormEvent, useState } from "react";
@@ -6,15 +12,12 @@ import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
 const Game = () => {
-  const { tasks } = useGetTasks();
   const navigate = useNavigate();
-
+  const { tasks, isLoading } = useGetTasks();
   const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
-  // Get team current question index
+  const [answer, setAnswer] = useState("");
 
   const currentTask = tasks[currentTaskIndex];
-
-  const [answer, setAnswer] = useState("");
 
   const submitAnswer = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,6 +34,16 @@ const Game = () => {
       enqueueSnackbar("Bandykite dar kartą...");
     }
   };
+
+  if (isLoading || !currentTask) {
+    return (
+      <BasePage>
+        <Stack my={5}>
+          <CircularProgress size={48} color="secondary" />
+        </Stack>
+      </BasePage>
+    );
+  }
 
   return (
     <BasePage>
