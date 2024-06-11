@@ -11,6 +11,8 @@ import { FormEvent, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
+const NO_OF_TASKS = 16;
+
 const Game = () => {
   const navigate = useNavigate();
   const { tasks, isLoading } = useGetTasks();
@@ -24,11 +26,10 @@ const Game = () => {
     setAnswer("");
 
     if (answer.toUpperCase() === currentTask.answer.toUpperCase()) {
-      if (tasks.length === currentTaskIndex + 1) {
+      if (currentTaskIndex + 1 === NO_OF_TASKS) {
         navigate("/final");
       }
 
-      enqueueSnackbar("Atspėjai!");
       setCurrentTaskIndex((prev) => prev + 1);
     } else {
       enqueueSnackbar("Bandykite dar kartą...");
