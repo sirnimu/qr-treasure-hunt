@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import BasePage from "./ui/BasePage";
 
+interface Team {
+  name: string;
+}
 const Leaderboard = () => {
-  const [teams, setTeams] = useState<{ name: string }[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
 
   useEffect(() => {
     const initTeams = async () => {

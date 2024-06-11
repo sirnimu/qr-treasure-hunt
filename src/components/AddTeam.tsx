@@ -29,7 +29,7 @@ const AddTeam = () => {
 
   return (
     <BasePage>
-      <Stack direction="column" gap={2} sx={{ height: "100vh" }}>
+      <Stack direction="column" gap={2}>
         <Typography>Pateikite komandos pavadinimą:</Typography>
         <TextField
           value={team}
