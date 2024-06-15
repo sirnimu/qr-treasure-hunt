@@ -11,7 +11,7 @@ import { FormEvent, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
-const NO_OF_TASKS = 16;
+const NO_OF_TASKS = 18;
 
 const Game = () => {
   const navigate = useNavigate();
