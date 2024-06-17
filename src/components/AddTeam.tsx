@@ -1,30 +1,21 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import BasePage from "./ui/BasePage";
-import { MouseEvent, useEffect, useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
-import firebase from "../firebase";
+import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
 
 const AddTeam = () => {
   const navigate = useNavigate();
 
-  const [team, setTeam] = useState("");
-
-  useEffect(() => {
-    setTeam(localStorage.getItem("team") ?? "");
-  }, []);
-
-  const ref = collection(firebase, "teams");
+  const [team, setTeam] = useLocalStorageState("team", {
+    defaultValue: "",
+  });
 
   const addTeam = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      addDoc(ref, { name: team });
-      localStorage.setItem("team", team);
-      navigate("/intro");
-    } catch (e) {
-      console.error(e);
-    }
+
+    localStorage.setItem("team", team);
+    navigate("/intro");
   };
 
   return (

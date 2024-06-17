@@ -12,20 +12,33 @@ import BasePage from "./ui/BasePage";
 import { FormEvent, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
+import db from "../firebase";
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 
-const NO_OF_TASKS = 16;
+const NO_OF_TASKS = 18;
 
 const Game = () => {
   const navigate = useNavigate();
   const { tasks, isLoading } = useGetTasks();
-  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+  const [currentTaskIndex, setCurrentTaskIndex] = useLocalStorageState(
+    "currentTaskIndex",
+    {
+      defaultValue: 0,
+    }
+  );
   const [answer, setAnswer] = useState("");
 
+  const teamName = localStorage.getItem("team") ?? "";
   const currentTask = tasks[currentTaskIndex];
 
-  const submitAnswer = (event: FormEvent<HTMLFormElement>) => {
+  const submitAnswer = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setAnswer("");
+
+    if (!answer) {
+      return;
+    }
 
     if (answer.toUpperCase() === currentTask.answer.toUpperCase()) {
       if (currentTaskIndex + 1 === NO_OF_TASKS) {
@@ -33,6 +46,10 @@ const Game = () => {
       }
 
       setCurrentTaskIndex((prev) => prev + 1);
+      const teamRef = doc(db, "teams", teamName);
+      await updateDoc(teamRef, {
+        [`task_${currentTaskIndex}_at`]: serverTimestamp(),
+      });
     } else {
       enqueueSnackbar("Bandykite dar kartą...");
     }

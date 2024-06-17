@@ -1,30 +1,47 @@
 import { Button, Stack, Typography } from "@mui/material";
 import OldPaper from "./ui/BasePage";
 import { useNavigate } from "react-router-dom";
+import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
+import db from "../firebase";
 
 const Intro = () => {
   const navigate = useNavigate();
 
   const teamName = localStorage.getItem("team");
 
+  const startGame = async () => {
+    if (!teamName) {
+      return;
+    }
+
+    try {
+      const docRef = doc(collection(db, "teams"), teamName);
+      await setDoc(docRef, { name: teamName, created_at: serverTimestamp() });
+      navigate("/play");
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <OldPaper>
-      <Stack py={2}>
-        <Typography variant="h3">{teamName}</Typography>
-      </Stack>
       <Typography variant="body1">
-        What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
-        and typesetting industry. Lorem Ipsum has been the industry's standard
-        dummy text ever since the 1500s, when an unknown printer took a galley
-        of type and scrambled it to make a type specimen book. It has survived
-        not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with
-        the release of Letraset sheets containing Lorem Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
+        Sveikiname subūrus{" "}
+        <Typography component="span" sx={{ fontWeight: 700 }}>
+          {teamName}
+        </Typography>{" "}
+        komandą! Kai pradėsite žaidimą, bus skaičiuojamas jūsų komandos laikas,
+        tad turite sparčiai ieškoti ir galvoti atsakymus - SKAIČIUS. Jei
+        matysite nuotrauką - toje Gniaužių vietoje slypi gudriai paslėptas
+        atsakymas. O jei matote uždavinį - skubėkite jį išmąstyti. Kur slypi
+        lobis paaiškės, kai suvesite visus atsakymus teisingai. Jei įvesite
+        neteisingą skaičių, gausite baudą - pridėsime 10 min prie lobio paieškos
+        laiko. O kas laukia pačių greičiausių? Prieš pat Joninių laužo uždegimą
+        bus skelbiami rezultatai ir viena komanda turės garbę jį uždegti kartu
+        su proseneliu Jonu! Pasiruošę?
       </Typography>
       <Stack py={2}>
-        <Button onClick={() => navigate("/play")}>Žaidžiam!</Button>
+        <Button onClick={startGame}>Pradedam!</Button>
       </Stack>
     </OldPaper>
   );

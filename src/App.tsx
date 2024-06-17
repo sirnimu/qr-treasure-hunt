@@ -10,13 +10,17 @@ import Game from "./components/Game";
 import AdminPanel from "./components/admin/AdminPanel";
 import { SnackbarProvider } from "notistack";
 import FinalTask from "./components/FinalTask";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 const queryClient = new QueryClient();
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#c9ae7f",
+      main: "#ddcaa8",
     },
     secondary: {
       main: "#64573f",
@@ -24,12 +28,12 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontFamily: ["Papyrus", "fantasy"].join(","),
       fontSize: 72,
+      fontWeight: 700,
     },
     h2: {
-      fontFamily: ["Papyrus", "fantasy"].join(","),
       fontSize: 48,
+      fontWeight: 500,
     },
   },
   components: {
@@ -82,7 +86,7 @@ const router = createBrowserRouter([
     element: <Leaderboard />,
   },
   {
-    path: "/admin",
+    path: "/gnzadmin",
     element: <AdminPanel />,
   },
 ]);
