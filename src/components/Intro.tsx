@@ -35,7 +35,7 @@ const Intro = () => {
         matysite nuotrauką - toje Gniaužių vietoje slypi gudriai paslėptas
         atsakymas. O jei matote uždavinį - skubėkite jį išmąstyti. Kur slypi
         lobis paaiškės, kai suvesite visus atsakymus teisingai. Jei įvesite
-        neteisingą skaičių, gausite baudą - pridėsime 10 min prie lobio paieškos
+        neteisingą skaičių, gausite baudą - pridėsime 5 min prie lobio paieškos
         laiko. O kas laukia pačių greičiausių? Prieš pat Joninių laužo uždegimą
         bus skelbiami rezultatai ir viena komanda turės garbę jį uždegti kartu
         su proseneliu Jonu! Pasiruošę?

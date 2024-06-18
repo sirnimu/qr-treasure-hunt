@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import db from "../firebase";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import Timer from "./Timer";
 
 const NO_OF_TASKS = 18;
 
@@ -27,9 +28,15 @@ const Game = () => {
       defaultValue: 0,
     }
   );
+  const [_, setPenalty] = useLocalStorageState("penalty", {
+    defaultValue: 0,
+  });
+
   const [answer, setAnswer] = useState("");
 
   const teamName = localStorage.getItem("team") ?? "";
+  const teamRef = doc(db, "teams", teamName);
+
   const currentTask = tasks[currentTaskIndex];
 
   const submitAnswer = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,12 +53,12 @@ const Game = () => {
       }
 
       setCurrentTaskIndex((prev) => prev + 1);
-      const teamRef = doc(db, "teams", teamName);
       await updateDoc(teamRef, {
         [`task_${currentTaskIndex}_at`]: serverTimestamp(),
       });
     } else {
-      enqueueSnackbar("Bandykite dar kartą...");
+      setPenalty((prev) => prev + 1);
+      enqueueSnackbar("Gavote 5 minučių baudą");
     }
   };
 
@@ -67,11 +74,8 @@ const Game = () => {
 
   return (
     <BasePage>
-      <Stack>
-        <Typography variant="h2">
-          Užduotis nr.{currentTask.index + 1}
-        </Typography>
-      </Stack>
+      <Typography variant="h2">Užduotis nr.{currentTask.index + 1}</Typography>
+      <Timer />
       <Stack flexDirection="column" my={2} gap={1}>
         <Typography>{currentTask.description}</Typography>
         {currentTask.question && (
