@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
 
+  const teamName = localStorage.getItem("team");
+
+  console.log(teamName);
   return (
     <BasePage>
       <Stack
@@ -26,11 +29,12 @@ const Home = () => {
           </Typography>
           <Typography variant="h2">2024</Typography>
         </Stack>
-        <Button onClick={() => navigate("/add-team")}>Sukurti komandą</Button>
+        {teamName ? (
+          <Button onClick={() => navigate("/play")}>Tęsti žaidimą</Button>
+        ) : (
+          <Button onClick={() => navigate("/add-team")}>Sukurti komandą</Button>
+        )}
         <Button onClick={() => navigate("/leaderboard")}>Rezultatai</Button>
-        <Button onClick={() => localStorage.clear()}>
-          Išvalyti sausainius
-        </Button>
       </Stack>
     </BasePage>
   );

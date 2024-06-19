@@ -38,12 +38,11 @@ const FinalTask = () => {
         finished_at: serverTimestamp(),
         total_penalty: Number(penalty) * 5 * 60,
       });
-      localStorage.removeItem("currentTaskIndex");
-      localStorage.removeItem("penalty");
+      localStorage.clear();
       setShowConfetti(true);
       setTimeout(() => {
-        navigate("/leaderboard");
-      }, 2500);
+        navigate(`/leaderboard?team=${teamName}`);
+      }, 7000);
     } else {
       enqueueSnackbar("Bandykite dar kartą...");
     }
@@ -51,6 +50,18 @@ const FinalTask = () => {
   return (
     <BasePage>
       {showConfetti && <Confetti />}
+      <Stack flexDirection="column">
+        <Typography>Valio! </Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          Įveikėt visas užduotis ir gavot tokius atsakymus:
+        </Typography>
+        <Typography sx={{ fontWeight: 500, fontSize: 18, my: 2 }}>
+          {allAnswers.slice(0, 9)} {allAnswers.slice(9, 18)}
+        </Typography>
+        <Typography sx={{ textAlign: "center" }}>
+          Visi skaičiai teisingi ir jie jus nuves prie lobio!
+        </Typography>
+      </Stack>
       <Stack flexDirection="column" gap={2}>
         <Typography
           paragraph
@@ -73,12 +84,7 @@ const FinalTask = () => {
   Pašaukit`}
         </Typography>
       </Stack>
-      <Stack flexDirection="column">
-        <Typography>Lobis slepiasi čia:</Typography>
-        <Typography sx={{ fontWeight: 500, fontSize: 18, my: 2 }}>
-          {coordinates}
-        </Typography>
-      </Stack>
+
       <Stack mb={1}>
         <Typography>Suvesk lobio vietoje rastą kodą:</Typography>
       </Stack>

@@ -13,7 +13,6 @@ const AddTeam = () => {
 
   const addTeam = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
     localStorage.setItem("team", team);
     navigate("/intro");
   };

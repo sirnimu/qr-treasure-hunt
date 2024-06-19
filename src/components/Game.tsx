@@ -16,6 +16,7 @@ import useLocalStorageState from "use-local-storage-state";
 import db from "../firebase";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import Timer from "./Timer";
+import { NumericFormat } from "react-number-format";
 
 const NO_OF_TASKS = 18;
 
@@ -74,10 +75,18 @@ const Game = () => {
 
   return (
     <BasePage>
-      <Typography variant="h2">Užduotis nr.{currentTask.index + 1}</Typography>
-      <Timer />
+      <Stack flexDirection="column">
+        <Timer />
+        <Typography variant="h2">
+          Užduotis nr. {currentTask.index + 1}
+        </Typography>
+      </Stack>
+
       <Stack flexDirection="column" my={2} gap={1}>
-        <Typography>{currentTask.description}</Typography>
+        <Typography sx={{ whiteSpace: "pre-wrap" }}>
+          {currentTask.description}
+        </Typography>
+
         {currentTask.question && (
           <Typography fontWeight={700}>{currentTask.question}</Typography>
         )}
@@ -95,12 +104,16 @@ const Game = () => {
 
       <form onSubmit={submitAnswer}>
         <Stack alignItems="stretch" gap={1}>
-          <TextField
+          <NumericFormat
             name="answer"
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
+            customInput={TextField}
             label="Jūsų atsakymas"
             autoComplete="off"
+            inputProps={{
+              maxLength: 1,
+            }}
           />
 
           <Button type="submit" size="large">

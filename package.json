@@ -26,6 +26,7 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-medium-image-zoom": "^5.2.0",
+    "react-number-format": "^5.4.0",
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.23.0",
     "use-local-storage-state": "^19.3.1",
