@@ -28,6 +28,9 @@ const Home = () => {
         </Stack>
         <Button onClick={() => navigate("/add-team")}>Sukurti komandą</Button>
         <Button onClick={() => navigate("/leaderboard")}>Rezultatai</Button>
+        <Button onClick={() => localStorage.clear()}>
+          Išvalyti sausainius
+        </Button>
       </Stack>
     </BasePage>
   );
