@@ -18,10 +18,6 @@ const FinalTask = () => {
   const penalty = localStorage.getItem("penalty") ?? 0;
 
   const allAnswers = tasks.map((t) => t.answer).join("");
-  const coordinates =
-    Number(allAnswers.slice(0, 9)) / 10000000 +
-    ", " +
-    Number(allAnswers.slice(9, 18)) / 10000000;
 
   const submitAnswer = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

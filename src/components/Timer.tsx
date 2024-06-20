@@ -3,7 +3,6 @@ import { doc, getDoc } from "firebase/firestore";
 import db from "../firebase";
 import { useEffect, useState } from "react";
 import { Team } from "./types";
-import { formatDistance } from "date-fns";
 
 const Timer = () => {
   const [currentTeam, setCurrentTeam] = useState<Team>();
