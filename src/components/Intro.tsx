@@ -11,6 +11,7 @@ const Intro = () => {
 
   const startGame = async () => {
     if (!teamName) {
+      alert("Team does not exist");
       return;
     }
 
@@ -54,7 +55,9 @@ const Intro = () => {
         proseneliu Jonu! Pasiruošę?
       </Typography>
       <Stack py={2}>
-        <Button onClick={startGame}>Pradedam!</Button>
+        <Button onClick={startGame} autoFocus>
+          Pradedam!
+        </Button>
       </Stack>
     </OldPaper>
   );

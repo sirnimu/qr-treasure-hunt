@@ -1,14 +1,15 @@
 import { collection, getDocs, query } from "firebase/firestore";
 import firebase from "../firebase";
 import { useEffect, useState } from "react";
-import { CircularProgress, Stack, Typography } from "@mui/material";
+import { IconButton, LinearProgress, Stack, Typography } from "@mui/material";
+import { Home as HomeIcon } from "@mui/icons-material";
 import BasePage from "./ui/BasePage";
 import { Team } from "./types";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Leaderboard = () => {
   const [teams, setTeams] = useState<Team[]>([]);
-
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const teamName = searchParams.get("team");
 
@@ -33,15 +34,22 @@ const Leaderboard = () => {
 
   return (
     <BasePage>
-      <Typography variant="h2" pt={2}>
-        Rezultatai:
-      </Typography>
-      {teams.length === 0 && <CircularProgress size={48} color="secondary" />}
-      <Stack display="grid" gridTemplateColumns="repeat(3, 1fr)">
-        <Typography sx={{ fontWeight: 500 }}>Pavadinimas</Typography>
+      <Stack justifyContent="space-between">
+        <Typography variant="h2" py={2}>
+          Rezultatai
+        </Typography>
+        <IconButton sx={{ marginRight: 2 }} onClick={() => navigate("/")}>
+          <HomeIcon />
+        </IconButton>
+      </Stack>
+
+      <Stack display="grid" gridTemplateColumns="1fr repeat(3, 2fr)">
+        <Typography sx={{ fontWeight: 500 }}>#</Typography>
+        <Typography sx={{ fontWeight: 500 }}>Komanda</Typography>
         <Typography sx={{ fontWeight: 500 }}>Bauda</Typography>
         <Typography sx={{ fontWeight: 500 }}>Bendras laikas</Typography>
       </Stack>
+      {teams.length === 0 && <LinearProgress color="secondary" />}
       {teams
         .sort((team1, team2) => {
           const timePassed1 =
@@ -76,15 +84,18 @@ const Leaderboard = () => {
               : 0;
           const penaltyTime = team?.total_penalty ?? 0;
           const totalTime = timePassed + penaltyTime;
-          const formattedTotalTime = `${Math.floor(
-            totalTime / 60
-          )}min  ${Math.floor(totalTime % 60)}s`;
+          const formattedTotalTime = `${
+            Math.floor(totalTime / 3600) + ":"
+          }${String(Math.floor((totalTime % 3600) / 60)).padStart(
+            2,
+            "0"
+          )}:${String(Math.floor(totalTime % 60)).padStart(2, "0")}`;
 
           return (
             <Stack
               key={index}
               display="grid"
-              gridTemplateColumns="repeat(3, 1fr)"
+              gridTemplateColumns="1fr repeat(3, 2fr)"
               sx={[
                 team.name === teamName && {
                   background: (theme) => theme.palette.secondary.main,
@@ -92,12 +103,11 @@ const Leaderboard = () => {
                 },
               ]}
             >
-              <Typography>
-                {index + 1}. {team.name}
-              </Typography>
+              <Typography>{index + 1}.</Typography>
+              <Typography>{team.name}</Typography>
               <Typography>
                 {team?.total_penalty
-                  ? Number(team?.total_penalty) / 60 + "min"
+                  ? Number(team?.total_penalty) / 60 + ":00"
                   : "-"}
               </Typography>
               <Typography>{timePassed ? formattedTotalTime : "-"}</Typography>

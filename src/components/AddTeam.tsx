@@ -1,6 +1,6 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import BasePage from "./ui/BasePage";
-import { MouseEvent } from "react";
+import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 
@@ -11,25 +11,35 @@ const AddTeam = () => {
     defaultValue: "",
   });
 
-  const addTeam = async (e: MouseEvent<HTMLButtonElement>) => {
+  const addTeam = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!team) {
+      return;
+    }
+
     localStorage.setItem("team", team);
     navigate("/intro");
   };
 
   return (
     <BasePage>
-      <Stack direction="column" gap={2}>
-        <Typography>Pateikite komandos pavadinimą:</Typography>
-        <TextField
-          value={team}
-          onChange={(e) => setTeam(e.target.value)}
-          label="Komandos pavadinimas"
-          variant="filled"
-          fullWidth
-        />
-        <Button onClick={addTeam}>Pateikti</Button>
-      </Stack>
+      <form onSubmit={addTeam}>
+        <Stack direction="column" gap={2}>
+          <Typography variant="h2" mt={2} mb={1}>
+            Sukurkite komandą
+          </Typography>
+          <Stack alignItems="stretch" gap={1}>
+            <TextField
+              value={team}
+              onChange={(e) => setTeam(e.target.value)}
+              label="Komandos pavadinimas"
+              variant="filled"
+              fullWidth
+            />
+            <Button type="submit">Pirmyn</Button>
+          </Stack>
+        </Stack>
+      </form>
     </BasePage>
   );
 };

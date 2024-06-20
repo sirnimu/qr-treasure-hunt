@@ -9,7 +9,7 @@ const BasePage = ({ children }: { children: ReactNode }) => {
         backgroundColor: "primary.main",
       }}
     >
-      <Container sx={{ py: 4 }}>{children}</Container>
+      <Container sx={{ py: 2 }}>{children}</Container>
     </Box>
   );
 };

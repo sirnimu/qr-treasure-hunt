@@ -25,7 +25,6 @@ const Timer = () => {
     fetchData();
   }, []);
 
-  console.log(currentTeam?.created_at);
   useEffect(() => {
     const interval = setInterval(() => {
       if (!currentTeam?.created_at) {
