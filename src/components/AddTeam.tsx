@@ -1,15 +1,11 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import BasePage from "./ui/BasePage";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
 
 const AddTeam = () => {
+  const [team, setTeam] = useState("");
   const navigate = useNavigate();
-
-  const [team, setTeam] = useLocalStorageState("team", {
-    defaultValue: "",
-  });
 
   const addTeam = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

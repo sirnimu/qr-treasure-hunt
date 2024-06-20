@@ -7,7 +7,6 @@ const Home = () => {
 
   const teamName = localStorage.getItem("team");
 
-  console.log(teamName);
   return (
     <BasePage>
       <Stack

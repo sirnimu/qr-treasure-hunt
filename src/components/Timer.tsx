@@ -7,11 +7,16 @@ import { Team } from "./types";
 const Timer = () => {
   const [currentTeam, setCurrentTeam] = useState<Team>();
   const [timePassed, setTimePassed] = useState(0);
-  const teamName = localStorage.getItem("team") ?? "";
+  const teamName = localStorage.getItem("team");
   const penalty = localStorage.getItem("penalty") ?? 0;
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!teamName) {
+        throw Error("No team data");
+        return;
+      }
+
       const teamRef = doc(db, "teams", teamName);
       const teamSnapshot = await getDoc(teamRef);
 
@@ -42,7 +47,7 @@ const Timer = () => {
   }, [currentTeam, penalty]);
 
   return (
-    <Typography>
+    <Typography sx={[!timePassed && { visibility: "hidden" }]}>
       {Math.floor(timePassed / 1000 / 60)}min{" "}
       {Math.floor((timePassed / 1000) % 60)}s
     </Typography>
