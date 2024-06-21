@@ -28,7 +28,7 @@ const Timer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [teamName]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,7 +39,7 @@ const Timer = () => {
       setTimePassed(
         new Date().getTime() -
           currentTeam?.created_at?.toDate().getTime() +
-          (!!penalty ? Number(penalty) * 1000 * 60 * 5 : 0)
+          (penalty ? Number(penalty) * 1000 * 60 * 5 : 0)
       );
     }, 1000);
 

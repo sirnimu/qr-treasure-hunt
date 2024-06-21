@@ -1,36 +1,14 @@
-import { collection, getDocs, query } from "firebase/firestore";
-import firebase from "../firebase";
-import { useEffect, useState } from "react";
 import { IconButton, LinearProgress, Stack, Typography } from "@mui/material";
 import { Home as HomeIcon } from "@mui/icons-material";
 import BasePage from "./ui/BasePage";
-import { Team } from "./types";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useGetTeams } from "./hooks/useGetTeams";
 
 const Leaderboard = () => {
-  const [teams, setTeams] = useState<Team[]>([]);
+  const { teams, isLoading } = useGetTeams();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const teamName = searchParams.get("team");
-
-  useEffect(() => {
-    const initTeams = async () => {
-      const q = query(collection(firebase, "teams"));
-      const querySnapshot = await getDocs(q);
-      const teams = querySnapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          name: data.name,
-          created_at: data.created_at,
-          finished_at: data.finished_at,
-          total_penalty: data.total_penalty,
-        };
-      });
-      setTeams(teams);
-    };
-
-    initTeams();
-  }, []);
 
   return (
     <BasePage>
@@ -49,7 +27,7 @@ const Leaderboard = () => {
         <Typography sx={{ fontWeight: 500 }}>Bauda</Typography>
         <Typography sx={{ fontWeight: 500 }}>Bendras laikas</Typography>
       </Stack>
-      {teams.length === 0 && <LinearProgress color="secondary" />}
+      {isLoading && <LinearProgress color="secondary" />}
       {teams
         .sort((team1, team2) => {
           const timePassed1 =

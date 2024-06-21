@@ -41,7 +41,7 @@ const Intro = () => {
         </Typography>
         . Jei matysite nuotrauką - toje Gniaužių vietoje slypi gudriai paslėptas
         atsakymas. O jei matote uždavinį - skubėkite jį išmąstyti. Kur slypi
-        lobis paaiškės, kai suvesite visus 18 atsakymus teisingai. Jei įvesite
+        lobis paaiškės, kai suvesite visus 18 atsakymų teisingai. Jei įvesite
         neteisingą skaičių, gausite{" "}
         <Typography component="span" sx={{ fontWeight: 700 }}>
           baudą

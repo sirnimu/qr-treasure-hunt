@@ -27,7 +27,7 @@ const Game = () => {
       defaultValue: 0,
     }
   );
-  const [_, setPenalty] = useLocalStorageState("penalty", {
+  const [, setPenalty] = useLocalStorageState("penalty", {
     defaultValue: 0,
   });
 

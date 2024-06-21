@@ -36,7 +36,7 @@ export const useGetTasks = () => {
 
   useEffect(() => {
     loadServerData();
-  }, []);
+  }, [loadServerData]);
 
   return {
     tasks,

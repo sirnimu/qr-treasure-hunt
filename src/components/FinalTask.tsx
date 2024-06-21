@@ -1,4 +1,12 @@
-import { Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  Stack,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import BasePage from "./ui/BasePage";
 import { useGetTasks } from "./hooks/useGetTasks";
 import { FormEvent, useState } from "react";
@@ -95,9 +103,21 @@ const FinalTask = () => {
 
       <Stack flexDirection="column" mb={1}>
         <Typography>Lobis slepiasi čia:</Typography>
-        <Typography sx={{ fontWeight: 500, fontSize: 18, my: 2 }}>
-          {coordinates}
-        </Typography>
+        <Stack>
+          <Typography sx={{ fontWeight: 500, fontSize: 18, my: 2 }}>
+            {coordinates}
+          </Typography>
+          <Tooltip title="Kopijuoti">
+            <IconButton
+              onClick={() => {
+                enqueueSnackbar("Nukopijavai!");
+                navigator.clipboard.writeText(coordinates);
+              }}
+            >
+              <ContentCopyIcon />
+            </IconButton>
+          </Tooltip>
+        </Stack>
       </Stack>
 
       <Stack mb={1}>
